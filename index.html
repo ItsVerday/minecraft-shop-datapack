@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Valgo's Shop Datapack Generator</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Valgo's Shop Datapack Generator</h1>
+
+            <div v-for="product in products">
+                <p><strong>{{ product.id }}</strong> <button v-on:click="deleteProduct(product.id)">Delete</button></p>
+                <ul>
+                    <li>Minecraft item ID: <input type="text" v-model="product.item"></input></li>
+                    <li>Display name: <input type="text" v-model="product.display"></input></li>
+                    <li>Buy price (leave blank for unbuyable item): <input type="text" v-model="product.buy"></input></li>
+                    <li>Sell price (leave blank for unsellable item): <input type="text" v-model="product.sell"></input></li>
+                </ul>
+            </div>
+            <input type="text" v-model="addID"></input> <button v-on:click="addProduct(addID)">Add product</button>
+            <button v-on:click="downloadPack()">{{ status }}</button>
+        </div>
+
+        <script src="jszip.min.js"></script>
+        <script src="filesaver.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
