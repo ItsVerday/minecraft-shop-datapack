@@ -2,6 +2,10 @@ function enchantedBook(enchantment, level) {
     return `minecraft:enchanted_book{StoredEnchantments:[{id:"${enchantment}",lvl:${level}s}]}`;
 }
 
+function commas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+
 /*
 const products = {
     stone: {
@@ -831,6 +835,7 @@ const products = {
 function generateDatapack(products, status) {
     let triggers = [];
     let triggerID = 0;
+
     function addTrigger(command) {
         let id = triggerID++;
         let data = {
@@ -965,7 +970,7 @@ function generateDatapack(products, status) {
             folder.file("buy_256.mcfunction", `scoreboard players set @p vs_bscount 256
     function valgos_shop:products/${id}/buy/buy`);
             let buy_256 = `/trigger ${addTrigger(`function valgos_shop:products/${id}/buy/buy_256`)}`;
-            menuText += `tellraw @p ["",{"text":"Buy: ${buy}¢/ea ","color":"green"},{"text":"[Buy 1] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_1}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${buy * 1}¢ total","color":"green"}]}},{"text":"[Buy 5] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_5}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${buy * 5}¢ total","color":"green"}]}},{"text":"[Buy 16] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_16}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${buy * 16}¢ total","color":"green"}]}},{"text":"[Buy 64] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_64}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${buy * 64}¢ total","color":"green"}]}},{"text":"[Buy 256] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_256}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${buy * 256}¢ total","color":"green"}]}}]
+            menuText += `tellraw @p ["",{"text":"Buy: ${commas(buy)}¢/ea ","color":"green"},{"text":"[Buy 1] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_1}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${commas(buy * 1)}¢ total","color":"green"}]}},{"text":"[Buy 5] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_5}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${commas(buy * 5)}¢ total","color":"green"}]}},{"text":"[Buy 16] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_16}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${commas(buy * 16)}¢ total","color":"green"}]}},{"text":"[Buy 64] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_64}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${commas(buy * 64)}¢ total","color":"green"}]}},{"text":"[Buy 256] ","color":"green","clickEvent":{"action":"run_command","value":"${buy_256}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Costs ${commas(buy * 256)}¢ total","color":"green"}]}}]
     `;
         }
 
@@ -1008,7 +1013,7 @@ function generateDatapack(products, status) {
             folder.file("sell_all.mcfunction", `scoreboard players set @p vs_bscount 99999
     function valgos_shop:products/${id}/sell/sell`);
             let sell_all = `/trigger ${addTrigger(`function valgos_shop:products/${id}/sell/sell_all`)}`;
-            menuText += `tellraw @p ["",{"text":"Sell: ${sell}¢/ea ","color":"gold"},{"text":"[Sell 1] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_1}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${sell * 1}¢ total","color":"gold"}]}},{"text":"[Sell 5] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_5}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${sell * 5}¢ total","color":"gold"}]}},{"text":"[Sell 16] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_16}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${sell * 16}¢ total","color":"gold"}]}},{"text":"[Sell 64] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_64}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${sell * 64}¢ total","color":"gold"}]}},{"text":"[Sell All] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_all}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${sell}¢ per item","color":"gold"}]}}]
+            menuText += `tellraw @p ["",{"text":"Sell: ${commas(sell)}¢/ea ","color":"gold"},{"text":"[Sell 1] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_1}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${commas(sell * 1)}¢ total","color":"gold"}]}},{"text":"[Sell 5] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_5}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${commas(sell * 5)}¢ total","color":"gold"}]}},{"text":"[Sell 16] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_16}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${commas(sell * 16)}¢ total","color":"gold"}]}},{"text":"[Sell 64] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_64}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${commas(sell * 64)}¢ total","color":"gold"}]}},{"text":"[Sell All] ","color":"gold","clickEvent":{"action":"run_command","value":"${sell_all}"},"hoverEvent":{"action":"show_text","contents":["",{"text":"Pays ${commas(sell)}¢ per item","color":"gold"}]}}]
     `;
         }
 
@@ -1034,14 +1039,14 @@ function generateDatapack(products, status) {
 
             const { buy, sell, display } = products[id];
 
-            let prices = `{"text":"${buy}¢/ea","color":"green"},{"text":" / ","color":"gray"},{"text":"${sell}¢/ea","color":"gold"},`;
+            let prices = `{"text":"${commas(buy)}¢/ea","color":"green"},{"text":" / ","color":"gray"},{"text":"${commas(sell)}¢/ea","color":"gold"},`;
 
             if (buy !== undefined && sell === undefined) {
-                prices = `{"text":"${buy}¢/ea","color":"green"},`;
+                prices = `{"text":"${commas(buy)}¢/ea","color":"green"},`;
             }
 
             if (buy === undefined && sell !== undefined) {
-                prices = `{"text":"${sell}¢/ea","color":"gold"},`;
+                prices = `{"text":"${commas(sell)}¢/ea","color":"gold"},`;
             }
 
             let openMenu = `/trigger ${addTrigger(`function valgos_shop:products/${id}/menu`)}`;
